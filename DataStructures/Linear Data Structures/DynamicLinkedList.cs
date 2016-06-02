@@ -190,8 +190,57 @@ namespace DataStructures
 
     }
 
+    public class TortoiseAndHare
+    {
+        public bool HasLoop(LinkedList<int> list)
+        {
+            LinkedListNode<int> tortoise = list.First;
+            LinkedListNode<int> hare = list.First;
 
+            while (tortoise != null && hare != null)
+            {
+                if (tortoise == hare)
+                {
+                    return true;
+                }
+                if (hare.Next != null)
+                {
+                    hare = hare.Next.Next;
+                }
+                tortoise = tortoise.Next;
+            }
+            return false;
 
+        }
 
+        public LinkedListNode<int> FindLoop(LinkedList<int> list)
+        {
+            LinkedListNode<int> tortoise = list.First;
+            LinkedListNode<int> hare = list.First;
 
+            while (hare.Next != null)
+            {
+                tortoise = tortoise.Next;
+                hare = hare.Next.Next;
+                if (tortoise == hare)
+                {
+                    break;
+                }
+            }
+
+            if (hare.Next == null)
+            {
+                return null;
+            }
+
+            tortoise = list.First; 
+            while (tortoise != hare)
+            {
+                tortoise = tortoise.Next;
+                hare = hare.Next;
+            }
+            return hare;
+        }
+
+    }
 }
