@@ -314,13 +314,13 @@ namespace DataStructures.Algorithms
             {
                 int tmp = source[i];
                 int j = i - 1;
-                while (j > 0 && source[j] > tmp)
+                while (j >= 0 && source[j] > tmp)
                 {
-                    source[i] = source[j];
+                    source[j + 1] = source[j];
                     j--;
                 }
 
-                source[j] = tmp;
+                source[j + 1] = tmp;
             }
             return source;
         }
