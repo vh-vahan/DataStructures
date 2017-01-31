@@ -167,6 +167,44 @@ namespace DataStructures
 
     }
 
+
+    public class TopoligicalSort
+    {
+
+        private void Sort(GraphAsListOfSuccessors graph, Stack<int> st, bool[] visited, int i)
+        {
+            visited[i] = true;
+
+            foreach (var item in graph.Nodes[i])
+            {
+                if(!visited[item])
+                {
+                    Sort(graph, st, visited, item);
+                }
+            }
+            st.Push(i);
+        }
+
+        public List<int> Sort(GraphAsListOfSuccessors graph)
+        {
+            Stack<int> st = new Stack<int>();
+
+            bool[] visited = new bool[graph.Size];
+
+            for (int i = 0; i < graph.Size; i++)
+            {
+                if(!visited[i])
+                {
+                    Sort(graph, st, visited, i) ;
+                }
+            }
+
+            var res = st.ToList();
+            return res;
+        }
+    }
+
+
     //Dijkstra's Algorithm to find the shortest path.
     public class ShortestPath
     {
