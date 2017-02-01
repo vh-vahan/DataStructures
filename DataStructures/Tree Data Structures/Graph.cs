@@ -356,7 +356,7 @@ namespace DataStructures
             foreach (var item in graph.Nodes)
             {
                 item.SomeData = int.MaxValue;
-                remaining.Add(graph.Nodes[i]);
+                remaining.Add(item);
             }
 
             AddToMST(graph.Nodes[0]);
