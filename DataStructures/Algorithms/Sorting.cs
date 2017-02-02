@@ -388,7 +388,7 @@ namespace DataStructures.Algorithms
             }
 
             List<int> sorted = new List<int>();
-            while (hp.Count > 0 )
+            while (hp.Count > 0)
             {
                 sorted.Add(hp[0]);
                 hp.Remove(0);
@@ -396,6 +396,69 @@ namespace DataStructures.Algorithms
 
             return sorted.ToArray();
         }
+
+
+        public static int[] CountingSort(int[] source)
+        {
+            int range = 10;
+            int[] counts = new int[range];
+
+            for (int i = 0; i < source.Length; i++)
+            {
+                counts[source[i]]++;
+            }
+
+            for (int i = 0; i < range; i++)
+            {
+                counts[i] += counts[i - 1];
+            }
+
+            int[] sorted = new int[source.Length];
+            for (int i = 0; i < sorted.Length; i++)
+            {
+                sorted[counts[source[i]] - 1] = source[i];
+                counts[source[i]]--;
+            }
+
+            return sorted;
+        }
+
+
+        public static void RadixSort(int[] source, int max)
+        {
+            for (int i = 1; max / i > 0; i = i * 10)
+            {
+                CountingSortByDigits(source, i);
+            }
+        }
+        public static void CountingSortByDigits(int[] source, int dig)
+        {
+            int range = 10;
+            int[] counts = new int[range];
+
+            for (int i = 0; i < source.Length; i++)
+            {
+                counts[(source[i] / dig) % 10]++;
+            }
+
+            for (int i = 0; i < range; i++)
+            {
+                counts[i] += counts[i - 1];
+            }
+
+            int[] sorted = new int[source.Length];
+            for (int i = 0; i < sorted.Length; i++)
+            {
+                sorted[counts[(source[i] / dig) % 10] - 1] = source[i];
+                counts[(source[i] / dig) % 10]--;
+            }
+
+            for (int i = 0; i < source.Length; i++)
+            {
+                source[i] = sorted[i];
+            }
+        }
+
 
     }
 }
