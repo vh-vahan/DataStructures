@@ -272,7 +272,7 @@ namespace DataStructures.Algorithms
             int i = left;
             for (int j = left; j <= right - 1; j++)
             {
-                if (arr[j] <= pivot)
+                if (arr[j] <= pivot & i != j)
                 {
                     int temp1 = arr[i];
                     arr[i] = arr[j];
@@ -408,7 +408,7 @@ namespace DataStructures.Algorithms
                 counts[source[i]]++;
             }
 
-            for (int i = 0; i < range; i++)
+            for (int i = 1; i < range; i++)
             {
                 counts[i] += counts[i - 1];
             }
@@ -441,7 +441,7 @@ namespace DataStructures.Algorithms
                 counts[(source[i] / dig) % 10]++;
             }
 
-            for (int i = 0; i < range; i++)
+            for (int i = 1; i < range; i++)
             {
                 counts[i] += counts[i - 1];
             }
